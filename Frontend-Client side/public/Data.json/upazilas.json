@@ -1,0 +1,27 @@
+[
+  { "id": "1", "name": "Dhamrai", "district_id": "1" },
+  { "id": "2", "name": "Savar", "district_id": "1" },
+  { "id": "3", "name": "Keraniganj", "district_id": "1" },
+
+  { "id": "4", "name": "Patiya", "district_id": "2" },
+  { "id": "5", "name": "Rangunia", "district_id": "2" },
+  { "id": "6", "name": "Sitakunda", "district_id": "2" },
+
+  { "id": "7", "name": "Paba", "district_id": "3" },
+  { "id": "8", "name": "Godagari", "district_id": "3" },
+
+  { "id": "9", "name": "Batiaghata", "district_id": "4" },
+  { "id": "10", "name": "Dumuria", "district_id": "4" },
+
+  { "id": "11", "name": "Babuganj", "district_id": "5" },
+  { "id": "12", "name": "Bakerganj", "district_id": "5" },
+
+  { "id": "13", "name": "Beanibazar", "district_id": "6" },
+  { "id": "14", "name": "Golapganj", "district_id": "6" },
+
+  { "id": "15", "name": "Badarganj", "district_id": "7" },
+  { "id": "16", "name": "Mithapukur", "district_id": "7" },
+
+  { "id": "17", "name": "Trishal", "district_id": "8" },
+  { "id": "18", "name": "Muktagacha", "district_id": "8" }
+]
