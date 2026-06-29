@@ -1,8 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import bdGeocode from "../../../data/bdGeocode";
+
 
 export default function CreateDonationRequest() {
   const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user?.status === "blocked") {
+      alert("Your account is blocked.");
+      navigate("/dashboard");
+    }
+  }, [navigate, user]);
+
 
   const [selectedDistrict, setSelectedDistrict] = useState("");
 
@@ -45,14 +55,40 @@ export default function CreateDonationRequest() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    console.log({
-      ...formData,
-      status: "pending",
-    });
-  };
+  try {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      "http://localhost:5000/api/donation-requests",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          ...formData,
+          status: "pending",
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("Donation Request Created Successfully!");
+      navigate("/dashboard/my-donation-requests");
+    } else {
+      alert(data.message || "Failed to create request");
+    }
+  } catch (error) {
+    console.log(error);
+    alert("Something went wrong");
+  }
+};
 
   return (
     <div className="max-w-5xl mx-auto bg-white p-8 rounded-xl shadow">
