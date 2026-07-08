@@ -1,121 +1,117 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router';
 
-
 const Login = () => {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
-  e.preventDefault();
-  setError("");
-  setLoading(true);
+    e.preventDefault();
 
-  try {
-    const response = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password, }),
-    });
+    setError("");
+    setLoading(true);
 
-    const data = await response.json();
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (response.ok) {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      const data = await res.json();
 
-      navigate("/dashboard");
-    } else {
-      setError(data.message || "Invalid email or password");
+      console.log("LOGIN RESPONSE:", data);
+
+      // ✅ CHECK TOKEN
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        navigate("/dashboard");
+      } else {
+        setError(data.message || "Invalid email or password");
+      }
+
+    } catch (err) {
+      console.log(err);
+      setError("Login failed");
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    setError("Login failed");
-  } finally {
-    setLoading(false);
-  }
-
   };
 
   return (
-  <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
-    <div className="card w-full max-w-md bg-base-100 shadow-xl">
-      <div className="card-body">
-        <h2 className="text-3xl font-bold text-center mb-4">
-          Login
-        </h2>
+    <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
+      <div className="card w-full max-w-md bg-base-100 shadow-xl">
+        <div className="card-body">
 
-        {error && (
-          <div className="alert alert-error mb-4">
-            <span>{error}</span>
-          </div>
-        )}
+          <h2 className="text-3xl font-bold text-center mb-4">
+            Login
+          </h2>
 
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">
-                Email Address
-              </span>
-            </label>
+          {error && (
+            <div className="alert alert-error mb-4">
+              <span>{error}</span>
+            </div>
+          )}
 
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="input input-bordered w-full"
-              required
-              value={email}
-              onChange={(e) =>
-                setEmail(e.target.value)
-              }
-            />
-          </div>
+          <form onSubmit={handleLogin} className="space-y-4">
 
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">
-                Password
-              </span>
-            </label>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Email Address</span>
+              </label>
 
-            <input
-              type="password"
-              placeholder="Enter your password"
-              className="input input-bordered w-full"
-              required
-              value={password}
-              onChange={(e) =>
-                setPassword(e.target.value)
-              }
-            />
-          </div>
+              <input
+                type="email"
+                className="input input-bordered w-full"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="btn btn-primary w-full"
-          >
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </form>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Password</span>
+              </label>
 
-        <p className="text-center mt-4">
-          Don't have an account yet?{" "}
-          <Link
-            to="/register"
-            className="text-primary font-semibold"
-          >
-            Register here
-          </Link>
-        </p>
+              <input
+                type="password"
+                className="input input-bordered w-full"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn btn-primary w-full"
+            >
+              {loading ? "Logging in..." : "Login"}
+            </button>
+
+          </form>
+
+          <p className="text-center mt-4">
+            Don't have an account yet?{" "}
+            <Link to="/register" className="text-primary font-semibold">
+              Register here
+            </Link>
+          </p>
+
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default Login;

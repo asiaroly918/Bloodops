@@ -35,10 +35,15 @@ export default function DonationRequestsPage() {
     fetchPendingRequests();
   }, []);
 
-  // Filter computation logic
+  // ⭐ Filter computation logic (এখানে শুধু .trim() যোগ করে পলিশ করা হয়েছে)
   const filteredRequests = requests.filter(req => {
     const matchesBlood = selectedBloodGroup ? req.bloodGroup === selectedBloodGroup : true;
-    const matchesDistrict = selectedDistrict ? req.district.toLowerCase().includes(selectedDistrict.toLowerCase()) : true;
+    
+    // ডিস্ট্রিক্ট ফিল্টারে স্পেস থাকলে তা কেটে ছোট হাতের অক্ষরের সাথে ম্যাচ করবে
+    const matchesDistrict = selectedDistrict 
+      ? req.district.toLowerCase().trim().includes(selectedDistrict.toLowerCase().trim()) 
+      : true;
+      
     return matchesBlood && matchesDistrict;
   });
 
