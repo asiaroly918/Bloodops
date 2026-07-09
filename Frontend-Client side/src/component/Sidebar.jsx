@@ -16,20 +16,34 @@ const Sidebar = () => {
 
   return (
     <div className="drawer-side">
-      <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
+
+      <label
+        htmlFor="dashboard-drawer"
+        className="drawer-overlay"
+      ></label>
+
 
       <aside className="relative w-64 min-h-full bg-base-100 border-r">
+
+
         {/* Logo */}
         <div className="p-6 border-b">
           <h2 className="text-2xl font-bold text-red-600">
-            BlooDrops
+            BloodDrops
           </h2>
         </div>
 
+
+
         {/* Menu */}
         <ul className="menu p-4 text-base-content">
+
+
+          {/* ================= DONOR MENU ================= */}
+
           {user?.role === "donor" && (
             <>
+
               <li>
                 <NavLink
                   to="/dashboard"
@@ -40,6 +54,7 @@ const Sidebar = () => {
                 </NavLink>
               </li>
 
+
               <li>
                 <NavLink
                   to="/dashboard/my-donation-requests"
@@ -48,6 +63,7 @@ const Sidebar = () => {
                   My Donation Requests
                 </NavLink>
               </li>
+
 
               <li>
                 <NavLink
@@ -58,6 +74,7 @@ const Sidebar = () => {
                 </NavLink>
               </li>
 
+
               <li>
                 <NavLink
                   to="/dashboard/profile"
@@ -66,22 +83,91 @@ const Sidebar = () => {
                   Profile
                 </NavLink>
               </li>
+
             </>
           )}
+
+
+
+
+
+          {/* ================= ADMIN MENU ================= */}
+
+          {user?.role === "admin" && (
+            <>
+
+              <li>
+                <NavLink
+                  to="/dashboard"
+                  end
+                  className={activeClass}
+                >
+                  Admin Dashboard
+                </NavLink>
+              </li>
+
+
+              <li>
+                <NavLink
+                  to="/dashboard/all-users"
+                  className={activeClass}
+                >
+                  All Users
+                </NavLink>
+              </li>
+
+
+              <li>
+                <NavLink
+                  to="/dashboard/admin-all-blood-donation-requests"
+                  className={activeClass}
+                >
+                  All Blood Donation Requests
+                </NavLink>
+              </li>
+
+
+              <li>
+                <NavLink
+                  to="/dashboard/profile"
+                  className={activeClass}
+                >
+                  Profile
+                </NavLink>
+              </li>
+
+
+            </>
+          )}
+
+
+
         </ul>
 
-        {/* Logout Button */}
+
+
+
+        {/* Logout */}
+
         <div className="absolute bottom-6 left-0 w-full px-4">
+
           <button
             onClick={handleLogout}
             className="btn btn-error w-full"
           >
             Logout
           </button>
+
         </div>
+
+
+
       </aside>
+
+
     </div>
   );
 };
+
 
 export default Sidebar;

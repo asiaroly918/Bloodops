@@ -1,102 +1,305 @@
+import { useEffect, useState } from "react";
+
 const Admin = () => {
-return (
+
+  const [stats, setStats] = useState({
+    totalDonors: 0,
+    totalRequests: 0,
+    pendingRequests: 0,
+    completedDonations: 0,
+    totalFunding: 0,
+  });
+
+
+  const [requests, setRequests] = useState([]);
+
+
+  useEffect(() => {
+
+    // Get Admin Stats
+    fetch("http://localhost:5000/api/admin/stats")
+      .then((res) => res.json())
+      .then((data) => {
+        setStats(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+
+    // Get Recent Blood Requests
+
+    fetch("http://localhost:5000/api/admin/recent-requests")
+      .then((res) => res.json())
+      .then((data) => {
+
+        setRequests(
+          Array.isArray(data) ? data : []
+        );
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+
+  }, []);
+
+
+
+  return (
     <div className="p-6">
 
+
       {/* Page Title */}
-    <h1 className="text-3xl font-bold mb-8">
+
+      <h1 className="text-3xl font-bold mb-8">
         Admin Dashboard
-    </h1>
+      </h1>
+
+
+
 
       {/* Stats Cards */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+
+
 
         <div className="bg-white shadow rounded-lg p-6">
-        <h3 className="text-gray-500">Total Donors</h3>
-        <p className="text-3xl font-bold text-red-600">120</p>
+
+          <h3 className="text-gray-500">
+            Total Donors
+          </h3>
+
+          <p className="text-3xl font-bold text-red-600">
+            {stats.totalDonors}
+          </p>
+
         </div>
+
+
+
 
         <div className="bg-white shadow rounded-lg p-6">
-        <h3 className="text-gray-500">Total Requests</h3>
-        <p className="text-3xl font-bold text-blue-600">45</p>
+
+          <h3 className="text-gray-500">
+            Total Requests
+          </h3>
+
+          <p className="text-3xl font-bold text-blue-600">
+            {stats.totalRequests}
+          </p>
+
         </div>
+
+
+
 
         <div className="bg-white shadow rounded-lg p-6">
-        <h3 className="text-gray-500">Pending Requests</h3>
-        <p className="text-3xl font-bold text-yellow-500">12</p>
+
+          <h3 className="text-gray-500">
+            Pending Requests
+          </h3>
+
+          <p className="text-3xl font-bold text-yellow-500">
+            {stats.pendingRequests}
+          </p>
+
         </div>
+
+
+
 
         <div className="bg-white shadow rounded-lg p-6">
-        <h3 className="text-gray-500">Completed Donations</h3>
-        <p className="text-3xl font-bold text-green-600">80</p>
+
+          <h3 className="text-gray-500">
+            Completed Donations
+          </h3>
+
+          <p className="text-3xl font-bold text-green-600">
+            {stats.completedDonations}
+          </p>
+
         </div>
 
-    </div>
 
-      {/* Recent Requests Table */}
-    <div className="mt-10 bg-white shadow rounded-lg p-6">
 
-        <h2 className="text-xl font-bold mb-4">
-        Recent Blood Requests
+
+        <div className="bg-white shadow rounded-lg p-6">
+
+          <h3 className="text-gray-500">
+            Total Funding
+          </h3>
+
+          <p className="text-3xl font-bold text-purple-600">
+            ${stats.totalFunding}
+          </p>
+
+        </div>
+
+
+
+      </div>
+
+
+
+
+
+
+      {/* Recent Blood Requests */}
+
+      <div className="mt-10 bg-white shadow rounded-lg p-6">
+
+
+        <h2 className="text-xl font-bold mb-4 text-black">
+          Recent Blood Requests
         </h2>
+
+
 
         <div className="overflow-x-auto">
 
-        <table className="table w-full">
+
+          <table className="table w-full text-black">
+
 
             <thead>
-            <tr>
-                <th>Recipient</th>
-                <th>Blood Group</th>
-                <th>District</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
+
+              <tr className="text-black">
+
+                <th>
+                  Recipient
+                </th>
+
+                <th>
+                  Blood Group
+                </th>
+
+                <th>
+                  District
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Action
+                </th>
+
+              </tr>
+
+
             </thead>
+
+
+
 
             <tbody>
 
-            <tr>
-                <td>John Doe</td>
-                <td>A+</td>
-                <td>Dhaka</td>
-                <td>
-                <span className="badge badge-warning">
-                    Pending
-                </span>
-                </td>
-                <td>
-                <button className="btn btn-sm btn-success">
-                    Approve
-                </button>
-                </td>
-            </tr>
 
-            <tr>
-                <td>Alice</td>
-                <td>O-</td>
-                <td>Chattogram</td>
-                <td>
-                <span className="badge badge-warning">
-                    Pending
-                </span>
-                </td>
-                <td>
-                <button className="btn btn-sm btn-success">
-                    Approve
-                </button>
-                </td>
-            </tr>
+              {
+                requests.length === 0 ? (
+
+                  <tr>
+
+                    <td colSpan="5" className="text-center">
+
+                      No Donation Request Found
+
+                    </td>
+
+                  </tr>
+
+
+                ) : (
+
+
+                  requests.map((request) => (
+
+                    <tr key={request._id}>
+
+
+                      <td className="text-black">
+                        {request.recipient_name}
+                      </td>
+
+
+
+                      <td>
+
+                        <span className="badge badge-error text-white">
+
+                          {request.blood_group}
+
+                        </span>
+
+                      </td>
+
+
+
+                      <td>
+                        {request.recipient_district}
+                      </td>
+
+
+
+                      <td>
+
+                        <span className="badge">
+
+                          {request.status}
+
+                        </span>
+
+                      </td>
+
+
+
+
+                      <td>
+
+                        <button className="btn btn-sm btn-primary">
+
+                          View
+
+                        </button>
+
+                      </td>
+
+
+
+                    </tr>
+
+
+                  ))
+
+                )
+              }
+
+
 
             </tbody>
 
-        </table>
+
+
+          </table>
+
+
 
         </div>
 
-    </div>
+
+
+      </div>
+
+
 
     </div>
   );
 };
+
 
 export default Admin;
