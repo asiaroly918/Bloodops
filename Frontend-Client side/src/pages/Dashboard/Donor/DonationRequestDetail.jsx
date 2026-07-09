@@ -27,6 +27,7 @@ const DonationRequestDetails = () => {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
           donor_name: user.name,

@@ -363,8 +363,7 @@ const MyDonationRequests = () => {
           className="btn btn-xs btn-primary"
 
           onClick={()=>
-            navigate(
-              `/donation-requests/${req._id}`
+            navigate(`/dashboard/donation-requests/${req._id}`
             )
           }
 
