@@ -119,7 +119,7 @@ const Sidebar = () => {
 
               <li>
                 <NavLink
-                  to="/dashboard/admin-all-blood-donation-requests"
+                  to="/dashboard/all-blood-donation-requests"
                   className={activeClass}
                 >
                   All Blood Donation Requests

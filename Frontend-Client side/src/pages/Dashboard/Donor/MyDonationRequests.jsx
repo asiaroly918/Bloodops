@@ -383,7 +383,7 @@ const MyDonationRequests = () => {
 
             <button
 
-            className="btn btn-xs btn-info"
+            className="btn btn-xs btn-5m"
 
             onClick={()=>
               navigate(

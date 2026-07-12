@@ -65,7 +65,146 @@ const getRecentRequests = async (req, res) => {
 
   }
 };
+// =============================
+// GET ALL USERS
+// GET /api/admin/users
+// =============================
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find().sort({ createdAt: -1 });
 
+    res.status(200).json(users);
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+// =============================
+// BLOCK USER
+// PATCH /api/admin/users/:id/block
+// =============================
+const blockUser = async (req, res) => {
+  try {
+    await User.findByIdAndUpdate(
+      req.params.id,
+      { status: "blocked" }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "User blocked successfully",
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+// =============================
+// UNBLOCK USER
+// PATCH /api/admin/users/:id/unblock
+// =============================
+const unblockUser = async (req, res) => {
+  try {
+    await User.findByIdAndUpdate(
+      req.params.id,
+      { status: "active" }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "User unblocked successfully",
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+// =============================
+// MAKE VOLUNTEER
+// PATCH /api/admin/users/:id/make-volunteer
+// =============================
+const makeVolunteer = async (req, res) => {
+  try {
+    await User.findByIdAndUpdate(
+      req.params.id,
+      { role: "volunteer" }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "User promoted to volunteer",
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+// =============================
+// MAKE ADMIN
+// PATCH /api/admin/users/:id/make-admin
+// =============================
+const makeAdmin = async (req, res) => {
+  try {
+    await User.findByIdAndUpdate(
+      req.params.id,
+      { role: "admin" }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "User promoted to admin",
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// =============================
+// ALL BLOOD DONATION REQUESTS
+// GET /api/admin/all-donation-requests
+// =============================
+const getAllDonationRequest = async (req, res) => {
+  try {
+
+    const requests = await DonationRequest
+      .find()
+      .sort({ createdAt: -1 });
+
+    res.status(200).json(requests);
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+
+  }
+};
 
 
 // =============================
@@ -74,4 +213,10 @@ const getRecentRequests = async (req, res) => {
 module.exports = {
   getAdminStats,
   getRecentRequests,
+  getAllUsers,
+  blockUser,
+  unblockUser,
+  makeVolunteer,
+  makeAdmin,
+  getAllDonationRequest,
 };
