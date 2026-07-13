@@ -83,6 +83,14 @@ const Sidebar = () => {
                   Profile
                 </NavLink>
               </li>
+              <li>
+  <NavLink
+    to="/funding"
+    className={activeClass}
+  >
+    Funding
+  </NavLink>
+</li>
 
             </>
           )}
@@ -136,9 +144,16 @@ const Sidebar = () => {
                 </NavLink>
               </li>
 
-
-            </>
-          )}
+              <li>
+  <NavLink
+    to="/funding"
+    className={activeClass}
+  >
+    Funding
+  </NavLink>
+</li>
+</>
+  )}
 
 
 
