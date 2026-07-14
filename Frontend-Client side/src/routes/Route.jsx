@@ -29,6 +29,9 @@ import AllBloodDonationRequests from "../pages/Dashboard/AllBloodDonationReq/All
 import PrivateRoute from "./PrivateRoute";
 import EditDonationRequest from "../pages/Dashboard/Donor/EditDonationRequest";
 import Funding from "../pages/Funding/funding";
+import AdminRoute from "./AdminRoute";
+import VolunteerRoute from "./VolunteerRoute";
+
 
 const router = createBrowserRouter([
 
@@ -74,85 +77,87 @@ const router = createBrowserRouter([
     ]
   },
 
-{
-    path:"dashboard",
-
-    element:
-    (
-      <PrivateRoute>
-        <DashboardLayout/>
-      </PrivateRoute>
-    ),
-
-
-    children:[
-     {
-        index:true,
-        Component:DashboardHome
-      },
-
-
-
-      {
-        path:"profile",
-        Component:Profile
-      },
-
-
-
-      {
-        path:"create-donation-request",
-        Component:CreateDonationRequest
-      },
-
-
-
-      {
-        path:"my-donation-requests",
-        Component:MyDonationRequests
-      },
-
-
-
-      {
-        path:"donation-requests/:id",
-        Component:DonationRequestDetail
-      },
-
-      {
-          path: "edit-donation-request/:id",
-          Component: EditDonationRequest,
-      },
-
-      // Admin
-
-      {
-        path:"all-users",
-        Component:AllUsers
-      },
-
-
-
-      // Page 15
-
-      {
-        path:"all-blood-donation-requests",
-        Component:AllBloodDonationRequests,
-      }
-    ]
-  },
-
-  //page 16
   {
-    path: "/funding",
-    element: (
-        <PrivateRoute>
-            <Funding />
-        </PrivateRoute>
-    )
-  }
+  path:"dashboard",
+
+  element:
+  (
+    <PrivateRoute>
+      <DashboardLayout/>
+    </PrivateRoute>
+  ),
+
+  children:[
+
+    {
+      index:true,
+      Component:DashboardHome
+    },
+
+    {
+      path:"profile",
+      Component:Profile
+    },
+
+    {
+      path:"create-donation-request",
+      Component:CreateDonationRequest
+    },
+
+    {
+      path:"my-donation-requests",
+      Component:MyDonationRequests
+    },
+
+    {
+      path:"donation-requests/:id",
+      Component:DonationRequestDetail
+    },
+
+    {
+      path:"edit-donation-request/:id",
+      Component:EditDonationRequest
+    },
+
+
+    // Admin
+
+    {
+      path:"all-users",
+      element:(
+        <AdminRoute>
+          <AllUsers/>
+        </AdminRoute>
+      )
+    },
+
+
+    // Page 15
+
+    {
+      path:"all-blood-donation-requests",
+      element:(
+        <VolunteerRoute>
+          <AllBloodDonationRequests/>
+        </VolunteerRoute>
+      )
+    }
+
+  ]
+},
+
+
+// Page 16 Funding
+
+{
+  path:"funding",
+  element:(
+    <PrivateRoute>
+      <Funding/>
+    </PrivateRoute>
+  )
+}
 
 ]);
-
 
 export default router;

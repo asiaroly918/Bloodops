@@ -6,13 +6,17 @@ export default function CreateDonationRequest() {
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user?.status === "blocked") {
-      alert("Your account is blocked.");
-      navigate("/dashboard");
-    }
-  }, [navigate, user]);
+ useEffect(() => {
+  if (user?.status === "blocked") {
+    alert(
+      "Your account is blocked. You cannot create donation requests."
+    );
 
+    navigate("/dashboard", {
+      replace: true,
+    });
+  }
+}, [user, navigate]);
   // Filter করার জন্য District ID
   const [selectedDistrictId, setSelectedDistrictId] = useState("");
 
@@ -110,7 +114,25 @@ export default function CreateDonationRequest() {
       alert("Something went wrong");
     }
   };
-      return(
+
+   if (user?.status === "blocked") {
+  return (
+    <div className="flex justify-center items-center min-h-[60vh]">
+      <div className="bg-white shadow-lg rounded-xl p-8 text-center">
+        <h2 className="text-3xl font-bold text-red-600 mb-4">
+          Account Blocked
+        </h2>
+
+        <p className="text-gray-600">
+          Your account has been blocked by the admin.
+          You cannot create donation requests.
+        </p>
+      </div>
+    </div>
+  );
+}
+  
+  return(
         
       <div className="max-w-5xl mx-auto bg-white p-8 rounded-xl shadow">
       <h2 className="text-3xl font-bold mb-8 text-center">
