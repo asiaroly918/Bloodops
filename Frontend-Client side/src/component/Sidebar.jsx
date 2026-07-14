@@ -5,6 +5,9 @@ const Sidebar = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
+  console.log("ROLE =", user?.role);
+  console.log("FULL USER =", user);
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
