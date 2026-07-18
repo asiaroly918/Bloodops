@@ -57,12 +57,15 @@ const Register = () => {
     console.log("API KEY =", apiKey);
     
     const response = await fetch(
-      `https://api.imgbb.com/1/upload?key=${apiKey}`,
-      {
-        method: "POST",
-        body: imageData,
-      }
-    );
+  "https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/auth/register",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  }
+);
 
     const result = await response.json();
 
