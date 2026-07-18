@@ -9,7 +9,15 @@ console.log("STRIPE KEY:", process.env.STRIPE_SECRET_KEY);
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://bloodops-client.vercel.app"
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 
@@ -29,6 +37,10 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
+}
+
+module.exports = app;
