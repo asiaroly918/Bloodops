@@ -35,7 +35,7 @@ const AllUsers = () => {
   const handleAction = (id, action) => {
 
     fetch(
-      `http://localhost:5000/api/admin/users/${id}/${action}`,
+      `http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/admin/users/${id}/${action}`,
       {
         method: "PATCH",
         headers: {

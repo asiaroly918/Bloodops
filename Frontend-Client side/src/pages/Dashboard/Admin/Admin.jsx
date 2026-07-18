@@ -17,7 +17,7 @@ const Admin = () => {
   useEffect(() => {
 
     // Get Admin Stats
-    fetch("http://localhost:5000/api/admin/stats")
+    fetch("http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/admin/stats")
       .then((res) => res.json())
       .then((data) => {
         setStats(data);
@@ -30,7 +30,7 @@ const Admin = () => {
 
     // Get Recent Blood Requests
 
-    fetch("http://localhost:5000/api/admin/recent-requests")
+    fetch("http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/admin/recent-requests")
       .then((res) => res.json())
       .then((data) => {
 

@@ -25,7 +25,7 @@ const CheckoutForm = ({ amount }) => {
 
       // Create Payment Intent
       const paymentIntentRes = await axios.post(
-        "http://localhost:5000/api/funding/create-payment-intent",
+        "http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/funding/create-payment-intent",
         {
           amount: Number(amount),
         }
@@ -64,7 +64,7 @@ const CheckoutForm = ({ amount }) => {
 
         // Save Funding Record
         await axios.post(
-          "http://localhost:5000/api/funding",
+          "http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/funding",
           {
             name:
               user?.name ||

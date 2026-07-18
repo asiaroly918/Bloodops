@@ -39,7 +39,7 @@ const MyDonationRequests = () => {
 
 
       const res = await fetch(
-        `http://localhost:5000/api/donation-requests?email=${user.email}`
+        `http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/donation-requests?email=${user.email}`
       );
 
 
@@ -113,7 +113,7 @@ const MyDonationRequests = () => {
     try{
 
       const res = await fetch(
-        `http://localhost:5000/api/donation-requests/${id}`,
+        `http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/donation-requests/${id}`,
         {
           method:"PATCH",
           headers:{
@@ -160,7 +160,7 @@ const MyDonationRequests = () => {
     try{
 
       const res = await fetch(
-        `http://localhost:5000/api/donation-requests/${id}`,
+        `http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/donation-requests/${id}`,
         {
           method:"DELETE"
         }

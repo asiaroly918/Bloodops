@@ -12,7 +12,7 @@ const AllBloodDonationRequests = () => {
   const loadRequests = async () => {
     try {
       const res = await fetch(
-        "http://localhost:5000/api/admin/all-donation-request"
+        "http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/admin/all-donation-request"
       );
 
       const data = await res.json();
@@ -35,7 +35,7 @@ const AllBloodDonationRequests = () => {
   const updateStatus = async (id, status) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/donation-request-status/${id}`,
+        `http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/donation-request-status/${id}`,
         {
           method: "PATCH",
           headers: {
