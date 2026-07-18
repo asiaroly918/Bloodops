@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router';
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router";
 
 const Login = () => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
@@ -16,20 +16,23 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await fetch(
+        "https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      );
 
       const data = await res.json();
 
-      console.log("LOGIN RESPONSE:", data);
-
-      // ✅ CHECK TOKEN
-      if (data.token) {
+      if (res.ok && data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
 
@@ -37,9 +40,8 @@ const Login = () => {
       } else {
         setError(data.message || "Invalid email or password");
       }
-
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setError("Login failed");
     } finally {
       setLoading(false);
@@ -50,7 +52,6 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
       <div className="card w-full max-w-md bg-base-100 shadow-xl">
         <div className="card-body">
-
           <h2 className="text-3xl font-bold text-center mb-4">
             Login
           </h2>
@@ -62,7 +63,6 @@ const Login = () => {
           )}
 
           <form onSubmit={handleLogin} className="space-y-4">
-
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email Address</span>
@@ -98,7 +98,6 @@ const Login = () => {
             >
               {loading ? "Logging in..." : "Login"}
             </button>
-
           </form>
 
           <p className="text-center mt-4">
@@ -107,7 +106,6 @@ const Login = () => {
               Register here
             </Link>
           </p>
-
         </div>
       </div>
     </div>

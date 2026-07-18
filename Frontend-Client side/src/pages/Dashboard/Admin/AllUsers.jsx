@@ -8,7 +8,7 @@ const AllUsers = () => {
 
   const loadUsers = () => {
 
-    fetch("http://localhost:5000/api/admin/users")
+    fetch("https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/admin/users")
       .then((res) => res.json())
       .then((data) => {
 
