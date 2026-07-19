@@ -1,3 +1,3 @@
 const axiosSecure = axios.create({
-  baseURL: "https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api"
+  baseURL: "https://bloodops.vercel.app/api"
 });
