@@ -8,7 +8,7 @@ const AllUsers = () => {
 
   const loadUsers = () => {
 
-    fetch("https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/admin/users")
+    fetch("https://bloodops.vercel.app/api/admin/users")
       .then((res) => res.json())
       .then((data) => {
 
@@ -35,7 +35,7 @@ const AllUsers = () => {
   const handleAction = (id, action) => {
 
     fetch(
-      `http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/admin/users/${id}/${action}`,
+      `http://https://bloodops.vercel.app/api/admin/users/${id}/${action}`,
       {
         method: "PATCH",
         headers: {

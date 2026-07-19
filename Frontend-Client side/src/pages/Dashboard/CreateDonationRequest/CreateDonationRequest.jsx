@@ -70,7 +70,7 @@ export default function CreateDonationRequest() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/donation-requests",
+        "http://https://bloodops.vercel.app/api/donation-requests",
         {
           method: "POST",
           headers: {

@@ -28,7 +28,7 @@ export default function Profile() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/users/${user._id}`,
+        `http://https://bloodops.vercel.app/api/users/${user._id}`,
         {
           method: "PUT",
           headers: {

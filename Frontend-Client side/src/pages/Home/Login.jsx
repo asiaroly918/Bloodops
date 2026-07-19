@@ -17,7 +17,7 @@ const Login = () => {
 
     try {
       const res = await fetch(
-        "https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/auth/login",
+        "https://bloodops.vercel.app/api/auth/login",
         {
           method: "POST",
           headers: {

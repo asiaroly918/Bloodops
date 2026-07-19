@@ -27,7 +27,7 @@ export default function EditDonationRequest() {
 
   useEffect(() => {
     fetch(
-      `http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/donation-requests/${id}`
+      `http://https://bloodops.vercel.app/api/donation-requests/${id}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -81,7 +81,7 @@ export default function EditDonationRequest() {
     e.preventDefault();
 
     const res = await fetch(
-      `http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/donation-requests/${id}`,
+      `http://https://bloodops.vercel.app/api/donation-requests/${id}`,
       {
         method: "PUT",
 

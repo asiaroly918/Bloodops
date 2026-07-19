@@ -105,7 +105,7 @@ const Register = () => {
     try {
       // এখানে বাড়তি সেমিকোলনটি (;) ফেলে দিয়ে ঠিক করা হয়েছে
       const response = await fetch(
-        "https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/auth/register",
+        "https://bloodops.vercel.app/api/auth/register",
         {
           method: "POST",
           headers: {

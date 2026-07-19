@@ -12,7 +12,7 @@ const DonationRequestDetails = () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    fetch(`http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/donation-requests/${id}`)
+    fetch(`http://https://bloodops.vercel.app/api/donation-requests/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setRequest(data.donationRequest);
@@ -22,7 +22,7 @@ const DonationRequestDetails = () => {
 
   const handleDonate = async () => {
     const res = await fetch(
-      `http://https://bloodops-ktf81tmxw-asiaroly918s-projects.vercel.app/api/donation-requests/${id}/status`,
+      `http://https://bloodops.vercel.app/api/donation-requests/${id}/status`,
       {
         method: "PATCH",
         headers: {
